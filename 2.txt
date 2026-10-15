@@ -32,7 +32,6 @@ ls -ld /project
 2.6. Настройка аутентификации и авторизации
 1) Политика сложности паролей (PAM):
 sudo apt install libpam-pwquality -y && echo -e "minlen = 8\nminclass = 3" | sudo tee -a /etc/security/pwquality.conf
-
 2) Авторизация сетевого трафика (Межсетевой экран UFW):
 sudo apt install ufw -y
 sudo ufw default deny incoming
@@ -42,7 +41,6 @@ sudo ufw enable
 sudo ufw status verbose
 
 2.7. Журнал мониторинга настроен
-Команды:
 sudo apt install rsyslog -y
 sudo systemctl enable --now rsyslog
 journalctl -p err -n 10 --no-pager

@@ -1,0 +1,35 @@
+sudo apt update && sudo apt upgrade -y
+1.1. Использованы специальные утилиты для настройки ядра
+sudo apt install tuned -y
+sudo systemctl enable --now tuned
+sudo tuned-adm profile throughput-performance
+tuned-adm active
+
+1.2. Сетевой протокол SSH настроен
+sudo apt install openssh-server -y
+sudo systemctl enable --now ssh
+sudo systemctl status ssh --no-pager
+
+1.3. Настроен удаленный доступ к активной сессии
+sudo apt install xrdp -y
+sudo adduser xrdp ssl-cert
+sudo systemctl enable --now xrdp
+sudo systemctl status xrdp --no-pager
+
+1.4. Настройка интернет-соединения
+ip link show
+ip -br a
+ip route
+ping -c 4 8.8.8.8
+nslookup google.com
+
+1.5. Установлено базовое программное обеспечение
+sudo snap install libreoffice
+sudo apt install p7zip-full hardinfo -y
+
+1.6. Установлен виртуальный принтер
+sudo apt install cups cups-pdf -y
+sudo systemctl enable --now cups
+sudo usermod -aG lpadmin $USER
+lpstat -p
+

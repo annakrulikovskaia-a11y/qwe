@@ -1,0 +1,48 @@
+2.1. Резервное копирование установленной ОС
+sudo dd if=/dev/sda2 of=/home/$USER/system_backup.img bs=4M count=250 status=progress
+
+2.2. Создан установочный образ системы
+Ставим стандартную утилиту создания ISO
+sudo apt install genisoimage -y
+Создаем реальный установочный ISO-образ
+genisoimage -o /home/$USER/install_image.iso /boot
+
+2.3. Созданы точки восстановления системы
+sudo apt install timeshift -y
+sudo timeshift-gtk
+sudo timeshift --list
+
+2.4. Созданы группы пользователей
+sudo groupadd developers
+sudo groupadd managers
+sudo adduser --gecos "" user1
+sudo adduser --gecos "" user2
+sudo usermod -aG developers user1
+sudo usermod -aG managers user2
+groups user1
+groups user2
+
+2.5. Разграничение прав доступа к ресурсам
+Создание общего рабочего каталога с доступом только для группы developers:
+sudo mkdir /project
+sudo chown :developers /project
+sudo chmod 770 /project
+ls -ld /project
+
+2.6. Настройка аутентификации и авторизации
+1) Политика сложности паролей (PAM):
+sudo apt install libpam-pwquality -y && echo -e "minlen = 8\nminclass = 3" | sudo tee -a /etc/security/pwquality.conf
+
+2) Авторизация сетевого трафика (Межсетевой экран UFW):
+sudo apt install ufw -y
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw status verbose
+
+2.7. Журнал мониторинга настроен
+Команды:
+sudo apt install rsyslog -y
+sudo systemctl enable --now rsyslog
+journalctl -p err -n 10 --no-pager

@@ -2,7 +2,7 @@ tuned-adm active
 sudo systemctl status ssh xrdp --no-pager
 ip -br a
 ping -c 2 8.8.8.8
-7z или hardinfo -v
+hardinfo -v
 lpstat -p
 groups user1 user2
 ls -ld /project
@@ -12,6 +12,7 @@ tail -n 2 /etc/security/pwquality.conf
 sudo ufw status
 Журнал мониторинга
 journalctl -p err -n 5 --no-pager
+
 gcc --version
 g++ --version
 cmake --version
@@ -19,4 +20,5 @@ cmake --version
 node -v
 npm -v
 tsc -v
+
 dotnet --version

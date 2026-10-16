@@ -1,4 +1,5 @@
 2.1. Резервное копирование установленной ОС
+lsblk
 sudo dd if=/dev/sda2 of=/home/$USER/system_backup.img bs=4M count=250 status=progress
 
 2.2. Создан установочный образ системы
